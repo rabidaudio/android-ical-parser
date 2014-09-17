@@ -1,10 +1,9 @@
-ICal to Calendar App
-====================
+# ICal to Calendar App
 
-For some reason, Android/native calendar/Google Calendar currently don't open `.ics` (iCalendar) event files.
+For some reason, the Android native calendar/Google Calendar apps currently don't open `.ics` (iCalendar) event files.
 However, it is common for websites to distribute "Add event to my calendar" links via these files. So this is
 a simple parser that reads `.ics` files and launches an [Insert Intent for Calendar 
-Provider][http://developer.android.com/guide/topics/providers/calendar-provider.html#intents]
+Provider](http://developer.android.com/guide/topics/providers/calendar-provider.html#intents)
 so that any calendar app can get them. 
 
 As with any program related to times and dates, I'm sure there are some weird edge cases I haven't considered.
@@ -18,8 +17,8 @@ Curently, the app only supports `VEVENT`s and only one event per file. This will
 
 
 
-MIT LICENCE
------------
+#### MIT LICENCE
+
 
 Copyright (C) 2014 Charles Julian Knight
 
