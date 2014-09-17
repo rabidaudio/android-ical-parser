@@ -32,8 +32,9 @@ public class ApplicationTest extends ActivityTestCase {
         Intent output = parser.buildIntent();
 
         Assert.assertNotNull("Intent is created", output);
-        Assert.assertEquals("Proper Action", output.getAction(), "content://com.android.calendar/events");
+        Assert.assertEquals("Proper Action", "content://com.android.calendar/events", output.getAction());
 
+        //values
         String title = output.getStringExtra(CalendarContract.Events.TITLE);
         long startTime = output.getLongExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, -1);
         long endTime = output.getLongExtra(CalendarContract.EXTRA_EVENT_END_TIME, -1);
@@ -45,16 +46,16 @@ public class ApplicationTest extends ActivityTestCase {
         //Events.ACCESS_LEVEL
         //Events.AVAILABILITY
 
-        Assert.assertEquals("Proper title", title, "Bass lesson");
+        Assert.assertEquals("Proper title", "Bass lesson", title);
 
-        Assert.assertEquals("Proper start time", startTime, new Date(2014, 7, 23, 18, 0).getTime());
-        Assert.assertEquals("Proper end time", endTime, new Date(2014, 7, 23, 19, 0).getTime());
+        Assert.assertEquals("Proper start time", new Date(2014, 7, 23, 18, 0).getTime(), startTime);
+        Assert.assertEquals("Proper end time", new Date(2014, 7, 23, 19, 0).getTime(), endTime);
         //Assert.assertFalse("Proper full-day event status", allDay);
 
-        Assert.assertEquals("Proper location", location, "Atlanta, GA, USA");
-        Assert.assertEquals("Proper description", description, "something");
+        Assert.assertEquals("Proper location", "Atlanta, GA, USA", location);
+        Assert.assertEquals("Proper description", "something", description);
 
-        Assert.assertEquals("Proper repetition rules", rrule, "FREQ=WEEKLY;WKST=SU;INTERVAL=2;BYDAY=WE");
+        Assert.assertEquals("Proper repetition rules", "FREQ=WEEKLY;WKST=SU;INTERVAL=2;BYDAY=WE", rrule);
 
 
     }

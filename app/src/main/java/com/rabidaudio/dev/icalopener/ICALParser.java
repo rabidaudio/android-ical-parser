@@ -16,6 +16,6 @@ public class ICALParser {
 
     public Intent buildIntent(){
 
-        return null;
+        return new Intent();
     }
 }
