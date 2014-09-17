@@ -55,8 +55,9 @@ public class ICALParser {
         boolean allDayEvent = ((event.getProperty("X-MICROSOFT-CDO-ALLDAYEVENT") != null            //Microsoft's custom field exists
                     && event.getProperty("X-MICROSOFT-CDO-ALLDAYEVENT").getValue().equals("true"))  //  and is true, or
                 || (end-start % 1000*60*60*24 == 0 ) );                                             //the duration is an integer number of days
-
         i.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, allDayEvent);
+
+        i.putExtra(CalendarContract.Events.RRULE, getValueOrNull(Property.RRULE));
 
         return i;
     }
@@ -76,14 +77,4 @@ public class ICALParser {
         }
         return null;
     }
-
-    /*
-            Intent out = new Intent();
-        out.setAction(Intent.ACTION_INSERT);
-        out.setData(CalendarContract.Events.CONTENT_URI);
-        out.putExtra(CalendarContract.Events.TITLE, "a title");
-        out.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true);
-        out.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, System.currentTimeMillis());
-        startActivity(out);
-     */
 }
