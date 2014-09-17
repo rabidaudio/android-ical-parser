@@ -14,19 +14,26 @@
             android:name=".MyActivity"
             android:label="@string/title_activity_my" >
 
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.VIEW" />-->
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+                <!--<category android:name="android.intent.category.BROWSABLE" />-->
+
+                <!--&lt;!&ndash;<data android:scheme="file" />&ndash;&gt;-->
+                <!--<data android:mimeType="text/calendar" />-->
+                 <!--&lt;!&ndash;<data android:mimeType="text/x-vcalendar"/> &ndash;&gt;-->
+                <!--&lt;!&ndash; <data android:mimeType="\*/\*" /> &ndash;&gt;-->
+                <!--&lt;!&ndash; <data android:pathPattern=".*\\.ics" /> &ndash;&gt;-->
+                <!--&lt;!&ndash; <data android:host="*" /> &ndash;&gt;-->
+            <!--</intent-filter>-->
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
-                <!--<data android:scheme="file" />-->
-                <data android:mimeType="text/calendar" />
-                 <!--<data android:mimeType="text/x-vcalendar"/> -->
-                <!-- <data android:mimeType="\*/\*" /> -->
-                <!-- <data android:pathPattern=".*\\.ics" /> -->
-                <!-- <data android:host="*" /> -->
+                <data   android:mimeType="text/calendar"/>
             </intent-filter>
+
         </activity>
 
     </application>
