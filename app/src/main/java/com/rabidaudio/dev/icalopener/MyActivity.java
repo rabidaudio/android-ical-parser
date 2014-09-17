@@ -6,11 +6,17 @@ import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.util.Log;
 
+import junit.framework.Assert;
+
+import net.fortuna.ical4j.data.ParserException;
+
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 
 
 public class MyActivity extends Activity {
@@ -23,6 +29,7 @@ public class MyActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
 
+
         Intent i = getIntent();
 
         Log.d("z", i.getType());
@@ -32,27 +39,24 @@ public class MyActivity extends Activity {
             finish();
         }
 
-        File icsfile = new File(i.getData().getPath());
-        BufferedReader r;
         try {
-            r = new BufferedReader(new FileReader(icsfile));
-            String s = r.readLine();
-            Log.v(TAG, s);
-        } catch (FileNotFoundException e) {
-            if(DEBUG) Log.e(TAG, "ICS file not found", e);
+            Intent out = new ICALParser(new FileInputStream(i.getData().getPath())).buildIntent();
         } catch (IOException e) {
-            if(DEBUG) Log.e(TAG, "couldn't read", e);
+            e.printStackTrace();
+        } catch (ParserException e) {
+            e.printStackTrace();
         }
-        if(DEBUG) Log.d(TAG, "Done");
-        //finish();
 
-        Intent out = new Intent();
-        out.setAction(Intent.ACTION_INSERT);
-        out.setData(CalendarContract.Events.CONTENT_URI);
-        out.putExtra(CalendarContract.Events.TITLE, "a title");
-        out.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true);
-        out.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, System.currentTimeMillis());
-        startActivity(out);
+        if(DEBUG) Log.d(TAG, "Done");
+//        finish();
+
+//        Intent out = new Intent();
+//        out.setAction(Intent.ACTION_INSERT);
+//        out.setData(CalendarContract.Events.CONTENT_URI);
+//        out.putExtra(CalendarContract.Events.TITLE, "a title");
+//        out.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true);
+//        out.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, System.currentTimeMillis());
+//        startActivity(out);
         /*
 
         EDIT
