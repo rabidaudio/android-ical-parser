@@ -1,28 +1,19 @@
 package com.rabidaudio.dev.icalopener;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.CalendarContract;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Date;
 
 
-public class MyActivity extends ActionBarActivity {
+public class MyActivity extends Activity {
 
     public static final String TAG = MyActivity.class.getCanonicalName();
     public static final Boolean DEBUG = true; //BuildConfig.DEBUG;
@@ -55,16 +46,9 @@ public class MyActivity extends ActionBarActivity {
         if(DEBUG) Log.d(TAG, "Done");
         //finish();
 
-        Uri eventURI;
-        if(Build.VERSION.SDK_INT >= 14){
-            eventURI = CalendarContract.Events.CONTENT_URI;
-        }else{
-            eventURI = Uri.fromParts("content", "//com.android.calendar/events", null);
-        }
-
         Intent out = new Intent();
         out.setAction(Intent.ACTION_INSERT);
-        out.setData(eventURI);
+        out.setData(CalendarContract.Events.CONTENT_URI);
         out.putExtra(CalendarContract.Events.TITLE, "a title");
         out.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true);
         out.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, System.currentTimeMillis());

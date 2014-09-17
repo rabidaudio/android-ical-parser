@@ -1,8 +1,20 @@
 package com.rabidaudio.dev.icalopener;
 
+import android.content.Intent;
+
+import java.io.FileInputStream;
+
 /**
- * Created by charles on 9/16/14.
+ * Convert ICS files into Calendar Provider intents.
  */
 public class ICALParser {
 
+    public ICALParser(FileInputStream ics){
+
+    }
+
+    public Intent buildIntent(){
+
+        return null;
+    }
 }
