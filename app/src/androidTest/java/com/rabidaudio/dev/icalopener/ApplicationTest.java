@@ -14,7 +14,10 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
@@ -70,9 +73,20 @@ public class ApplicationTest extends ActivityUnitTestCase<MyActivity> {
         long endTime = output.getLongExtra(CalendarContract.EXTRA_EVENT_END_TIME, -1);
         boolean allDay = output.getBooleanExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true);
 
-        Assert.assertEquals("Proper start time", new Date(2014, 7, 23, 18, 0).getTime(), startTime);
-        Assert.assertEquals("Proper end time", new Date(2014, 7, 23, 19, 0).getTime(), endTime);
-        //Assert.assertFalse("Proper full-day event status", allDay);
+
+        GregorianCalendar cal = new GregorianCalendar(TimeZone.getTimeZone("GMT-4:00"));
+        cal.set(2014, Calendar.JULY, 23, 18, 0, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        long correctStartTime = cal.getTime().getTime();
+
+        cal = new GregorianCalendar(TimeZone.getTimeZone("GMT-4:00"));
+        cal.set(2014, Calendar.JULY, 23, 19, 0, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        long correctEndTime = cal.getTime().getTime();
+
+        Assert.assertEquals("Proper start time", correctStartTime, startTime);
+        Assert.assertEquals("Proper end time", correctEndTime, endTime);
+        Assert.assertEquals("Proper full-day event status", false, allDay);
     }
 
     public void testProperExtendedFields() throws Exception {
